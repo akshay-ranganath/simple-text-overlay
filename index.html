@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Text Overlay Creator</title>
+    <link rel="stylesheet" href="./skeleton.min.css">
+    <script src="./script.js"></script>
+    <script src="https://media-library.cloudinary.com/global/all.js">   </script>
+</head>
+
+<body><img
+        src="https://res.cloudinary.com/cloudinary/image/upload/fl_attachment/v1/logo/for_white_bg/cloudinary_logo_for_white_bg.svg"
+        height="36" width="169" alt="cloudinary">
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="twelve columns">
+                <h4>Text Overlay Creator</h4>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns"><label>Pick an Image</label><br><input class="my_btn" type="button" id="my_btn"
+                    name="Open ML"></div>
+        </div>
+        <div class="row">
+            <div class="twelve columns"><span> </span><span id="link" style="word-wrap: break-word;">Cloudinary URL will
+                    be shown here </span><br><img src="https://res.cloudinary.com/demo/image/upload/sample" id="img"
+                    style="display:none"><canvas width="200" height="200" style="border:1px solid #000000;"
+                    id="canvas"></canvas></div>
+        </div>
+        <div class="row">
+            <div class="three columns">
+                <h4>Line 1 Settings</h4>
+            </div>
+            <div class="one column"></div>
+            <div class="three columns">
+                <h4>Line 2 Settings</h4>
+            </div>
+            <div class="one column"></div>
+            <div class="three columns">
+                <h4>Line 3 Settings</h4>
+            </div>
+            <div class="one column"></div>
+        </div>
+        <div class="row">
+            <div class="three columns"><label>Text<textarea class="message" rows="4" cols="40"></textarea></label></div>
+            <div class="one column"></div>
+            <div class="three columns"><label>Text<textarea class="message" rows="4" cols="40"></textarea></label></div>
+            <div class="one column"></div>
+            <div class="three columns"><label>Text<textarea class="message" rows="4" cols="40"></textarea></label></div>
+            <div class="one column"></div>
+        </div>
+        <div class="row">
+            <div class="three columns"><label>Font Face &nbsp;<select class="fontFace" name="font">
+                        <option value="f3">Choose one.. </option>
+                    </select></label></div>
+            <div class="one column"></div>
+            <div class="three columns"><label>Font Face &nbsp;<select class="fontFace" name="font">
+                        <option value="f3">Choose one.. </option>
+                    </select></label></div>
+            <div class="one column"></div>
+            <div class="three columns"><label>Font Face &nbsp;<select class="fontFace" name="font">
+                        <option value="f3">Choose one.. </option>
+                    </select></label></div>
+            <div class="one column"></div>
+        </div>
+        <div class="row">
+            <div class="three columns"><label>Font Size &nbsp;<input class="fontSize" type="text" size="6"></label>
+            </div>
+            <div class="one column"></div>
+            <div class="three columns"><label>Font Size &nbsp;<input class="fontSize" type="text" size="6"></label>
+            </div>
+            <div class="one column"></div>
+            <div class="three columns"><label>Font Size &nbsp;<input class="fontSize" type="text" size="6"></label>
+            </div>
+            <div class="one column"></div>
+        </div>
+        <div class="row">
+            <div class="three columns"><label>Font Color &nbsp;<input class="fontColor" type="text" value="000000"
+                        size="6"></label></div>
+            <div class="one column"></div>
+            <div class="three columns"><label>Font Color &nbsp;<input class="fontColor" type="text" value="000000"
+                        size="6"></label></div>
+            <div class="one column"></div>
+            <div class="three columns"><label>Font Color &nbsp;<input class="fontColor" type="text" value="000000"
+                        size="6"></label></div>
+            <div class="one column"></div>
+        </div>
+        <div class="row">
+            <div class="three columns">
+                <div style="float:right"><input class="mousePosition" type="button" value="Pick"></div>
+                <div style="float:left"><label>X &nbsp;<input class="positionX" type="text" value="400"
+                            size="5"></label></div>
+                <div style="float:center"><label>&nbsp; Y &nbsp;<input class="positionY" type="text" value="400"
+                            size="5"></label></div>
+            </div>
+            <div class="one column"></div>
+            <div class="three columns">
+                <div style="float:right"><input class="mousePosition" type="button" value="Pick"></div>
+                <div style="float:left"><label>X &nbsp;<input class="positionX" type="text" value="400"
+                            size="5"></label></div>
+                <div style="float:center"><label>&nbsp; Y &nbsp;<input class="positionY" type="text" value="400"
+                            size="5"></label></div>
+            </div>
+            <div class="one column"></div>
+            <div class="three columns">
+                <div style="float:right"><input class="mousePosition" type="button" value="Pick"></div>
+                <div style="float:left"><label>X &nbsp;<input class="positionX" type="text" value="400"
+                            size="5"></label></div>
+                <div style="float:center"><label>&nbsp; Y &nbsp;<input class="positionY" type="text" value="400"
+                            size="5"></label></div>
+            </div>
+            <div class="one column"> </div>
+        </div>
+        <div class="row">
+            <div class="one column"><input type="button" name="preview" value="Preview"></div>
+            <div class="one column"></div>
+            <div class="one column"><input type="button" name="clear" value="Clear"></div>
+            <div class="one column"> </div>
+            <div class="one column"><input type="button" name="generate" value="Generate"></div>
+        </div>
+    </div>
+    <script type="text/javascript">// Customize settings
+        // your cloud name
+        var cloudName = 'demo'
+        // a default image
+        var baseUrl = 'https://res.cloudinary.com/demo/image/upload'
+        var publicId = 'sample'
+        // an API key
+        var apiKey = '373364719177799'
+        // tag name for fonts
+        var fontListURL = 'https://res.cloudinary.com/demo/raw/list/s--hlQPdR4E--/font.json'
+        var config = {}
+
+
+        // add an event listenr for click on canvas. This will be used to detect mouse pointer position to position text overlay
+        document.getElementById('canvas').addEventListener('click', function (e) {
+            setMousePosition(e)
+        })
+
+        // enable ability to pick overlay position for each line
+        const mouseTrackers = document.getElementsByClassName('mousePosition')
+        for (let i = 0; i < mouseTrackers.length; i++) {
+            mouseTrackers[i].addEventListener(
+                'click',
+                function () {
+                    config.mouseTrackerEnabled = i
+                },
+                false
+            )
+        }
+
+        // add an event handler to load the image in canvas when the <img> tag is ready with the image
+        document.getElementById('img').addEventListener('load', function (e) {
+            setCanvasImage(e)
+        })
+
+        // function for each main button
+
+        document.getElementsByName('preview')[0].addEventListener(
+            'click',
+            previewTransformation,
+            false
+        )
+
+        document.getElementsByName('clear')[0].addEventListener(
+            'click',
+            clearTransformation,
+            false
+        )
+
+        document.getElementsByName('generate')[0].addEventListener(
+            'click',
+            generateTransformation,
+            false
+        )
+
+        window.addEventListener('load', function () {
+            fetchAndAddFonts()
+        })
+
+
+        let ml = null
+
+        const mloptions = {
+            cloud_name: cloudName,
+            api_key: apiKey,
+            button_class: 'myBtn',
+            button_caption: 'Insert Image',
+            multiple: false
+        }
+
+        window.ml = cloudinary.createMediaLibrary(mloptions, { insertHandler: insertHandler }, "#my_btn")</script>
+
+</body>
+
+</html>
